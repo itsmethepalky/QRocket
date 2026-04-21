@@ -3,61 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QRocket - QR Scanner & Generator</title>
+  <title>QRocket - Fast QR Scanner & Generator</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #fff;
+      background: #0b1220;
+      color: #e5e7eb;
+      line-height: 1.6;
     }
+
     header {
-      text-align: center;
-      padding: 60px 20px;
-      background: linear-gradient(135deg, #2563eb, #9333ea);
+      position: sticky;
+      top: 0;
+      background: rgba(11,18,32,0.8);
+      backdrop-filter: blur(10px);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1f2937;
     }
+
     header h1 {
-      font-size: 3em;
-      margin: 0;
-    }
-    header p {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #fff;
-      color: #000;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    section {
-      padding: 50px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h2 {
+      font-size: 1.4em;
       color: #60a5fa;
     }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 0.9em;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: radial-gradient(circle at top, #1d4ed8, #0b1220);
+    }
+
+    .hero h2 {
+      font-size: 3em;
+      font-weight: 700;
+    }
+
+    .hero p {
+      margin-top: 15px;
+      font-size: 1.2em;
+      color: #9ca3af;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 30px;
+      background: #3b82f6;
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 70px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 40px;
+    }
+
     .features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
     }
+
     .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
+      background: #111827;
+      padding: 25px;
+      border-radius: 12px;
+      transition: 0.3s;
+      border: 1px solid #1f2937;
     }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+    }
+
+    .card h4 {
+      margin-bottom: 10px;
+      color: #60a5fa;
+    }
+
+    .usecases ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    .usecases li {
+      margin: 10px 0;
+      color: #9ca3af;
+    }
+
+    .download {
+      text-align: center;
+      background: #111827;
+      border-radius: 12px;
+      padding: 50px 20px;
+    }
+
+    .download p {
+      margin-top: 10px;
+      color: #9ca3af;
+    }
+
     footer {
       text-align: center;
-      padding: 20px;
-      background: #020617;
+      padding: 30px;
       font-size: 0.9em;
-      color: #aaa;
+      color: #6b7280;
+      border-top: 1px solid #1f2937;
     }
   </style>
 </head>
@@ -65,75 +150,73 @@
 
 <header>
   <h1>QRocket 🚀</h1>
-  <p>Fast, lightweight QR code scanner & generator</p>
-  <a href="https://www.dropbox.com/scl/fi/5iob0y48vpj3bygb32gur/QRocket.apk?rlkey=slo3u9ltetwuoud4fb116jzyw&st=v8owsibm&dl=1" class="btn">Download Now</a>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#download">Download</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<section>
-  <h2>About QRocket</h2>
-  <p>
-    QRocket is a powerful yet lightweight app designed for scanning and generating QR codes instantly.
-    Built for speed, accuracy, and simplicity, it works seamlessly even offline.
-  </p>
+<section class="hero">
+  <h2>Scan. Generate. Done.</h2>
+  <p>Lightning-fast QR & barcode scanner with offline support.</p>
+  <a href="https://www.dropbox.com/scl/fi/5iob0y48vpj3bygb32gur/QRocket.apk?dl=1" class="btn">
+    Download APK
+  </a>
+  <p style="margin-top:10px;font-size:0.9em;">78.5MB • Android 7.0+</p>
 </section>
 
-<section>
-  <h2>Key Features</h2>
+<section id="features">
+  <h3>Features</h3>
   <div class="features">
-    <div class="card">⚡ Fast QR & Barcode Scanner</div>
-    <div class="card">📱 Instant QR Code Generator</div>
-    <div class="card">🕘 Scan History Access</div>
-    <div class="card">🎯 Simple UI</div>
-    <div class="card">🚀 Lightweight Performance</div>
-    <div class="card">📡 Works Offline</div>
+    <div class="card">
+      <h4>⚡ Fast Scanning</h4>
+      <p>Instantly scan QR codes and barcodes with high accuracy.</p>
+    </div>
+    <div class="card">
+      <h4>📱 QR Generator</h4>
+      <p>Create QR codes for links, WiFi, contacts, and more.</p>
+    </div>
+    <div class="card">
+      <h4>🕘 History</h4>
+      <p>Access your scan history anytime with ease.</p>
+    </div>
+    <div class="card">
+      <h4>📡 Offline Mode</h4>
+      <p>Scan and generate codes even without internet.</p>
+    </div>
   </div>
 </section>
 
-<section>
-  <h2>Use Cases</h2>
+<section class="usecases">
+  <h3>What You Can Do</h3>
   <ul>
-    <li>🌐 Open websites & links</li>
-    <li>📶 Share WiFi credentials</li>
-    <li>👤 Share contacts</li>
-    <li>📦 Scan product barcodes</li>
-    <li>📝 Encode text & info</li>
+    <li>🌐 Open websites instantly</li>
+    <li>📶 Share WiFi access</li>
+    <li>👤 Share contacts easily</li>
+    <li>📦 Scan products</li>
   </ul>
 </section>
 
-<section>
-  <h2>Technical Details</h2>
-  <p><strong>Version:</strong> 1.0</p>
-  <p><strong>Size:</strong> 78.5MB</p>
-  <p><strong>Release Date:</strong> 2026</p>
-  <p><strong>Minimum OS:</strong> Android 7.0</p>
-  <p><strong>Developer:</strong> The Palky</p>
+<section id="download">
+  <div class="download">
+    <h3>Download QRocket</h3>
+    <a href="https://www.dropbox.com/scl/fi/5iob0y48vpj3bygb32gur/QRocket.apk?dl=1" class="btn">
+      Get APK
+    </a>
+    <p>⚠️ Enable "Install unknown apps" in Android settings</p>
+  </div>
 </section>
 
-<section>
-  <h2>Privacy</h2>
-  <p>
-    QRocket respects your privacy. The app does not collect or share user data with third parties.
+<section id="contact">
+  <h3>Contact</h3>
+  <p style="text-align:center;">
+    📧 thepalky@proton.me
   </p>
 </section>
 
-<section>
-  <h2>Permissions</h2>
-  <ul>
-    <li>Camera access (for scanning QR codes)</li>
-    <li>Network & WiFi access</li>
-    <li>Foreground services</li>
-    <li>Vibration control</li>
-    <li>Wake locks (to keep app active)</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Contact Developer</h2>
-  <p>Email: <a href="mailto:thepalky@proton.me" style="color:#60a5fa;">thepalky@proton.me</a></p>
-</section>
-
 <footer>
-  <p>© 2026 QRocket ❤️ The Palky </p>
+  <p>© 2026 QRocket ❤️ Developed by The Palky</p>
 </footer>
 
 </body>
