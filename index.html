@@ -8,245 +8,133 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+:root {
+  --primary:#3b82f6;
+  --bg:#0b1220;
+  --card:#111827;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
 }
 
-body {
-  background: #0b1220;
-  color: #e5e7eb;
+body.light {
+  --bg:#f9fafb;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
 }
 
-/* HEADER */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 10000;
-  background: rgba(11,18,32,0.95);
-  backdrop-filter: blur(10px);
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #1f2937;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:var(--bg);color:var(--text);transition:.3s}
+
+header{
+  position:sticky;top:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 20px;
+  border-bottom:1px solid #1f2937;
+  backdrop-filter:blur(10px);
 }
 
-header h1 {
-  color: #60a5fa;
-  font-size: 1.4em;
+.hero{text-align:center;padding:70px 15px;background:radial-gradient(circle at top,#1d4ed8,#0b1220)}
+.hero h2{font-size:2rem}
+.hero p{color:var(--muted);margin-top:10px}
+
+.btn{display:inline-block;margin-top:20px;padding:12px 24px;border-radius:30px;background:var(--primary);color:#fff;text-decoration:none;font-weight:600;transition:.3s}
+.btn:hover{transform:scale(1.05)}
+
+section{padding:60px 15px;max-width:1100px;margin:auto}
+
+/* INSTALL CARD */
+.install-card{
+  display:flex;gap:15px;align-items:center;
+  background:var(--card);
+  padding:15px;border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  margin-top:20px;
+}
+.install-card img{width:60px;border-radius:12px}
+.install-info{flex:1}
+.install-info h4{margin-bottom:5px}
+.install-btn{padding:8px 15px;border-radius:20px;background:var(--primary);color:#fff;text-decoration:none}
+
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:var(--card);padding:20px;border-radius:12px;transition:.3s}
+.card:hover{transform:translateY(-6px)}
+
+footer{text-align:center;padding:20px;color:var(--muted)}
+
+.toggle{
+  cursor:pointer;
+  background:var(--card);
+  padding:6px 10px;
+  border-radius:20px;
 }
 
-header a {
-  color: #fff;
-  margin-left: 20px;
-  text-decoration: none;
-  font-size: 0.9em;
-}
+/* animations */
+.fade-in{opacity:0;transform:translateY(20px);animation:fade 1s forwards}
+@keyframes fade{to{opacity:1;transform:none}}
 
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 110px 20px;
-  background: radial-gradient(circle at top, #1d4ed8, #0b1220);
-}
-
-.hero h2 {
-  font-size: 3em;
-}
-
-.hero p {
-  margin-top: 15px;
-  font-size: 1.2em;
-  color: #9ca3af;
-}
-
-/* BUTTON (FIXED + STABLE) */
-.btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 14px 30px;
-  background: #3b82f6;
-  color: #fff;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  position: relative;
-  z-index: 99999;
-
-  opacity: 1;
-  visibility: visible;
-
-  transition: 0.2s;
-}
-
-.btn:hover {
-  background: #2563eb;
-  transform: translateY(-2px);
-}
-
-/* SECTIONS */
-section {
-  padding: 70px 20px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-h3 {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 40px;
-}
-
-/* FEATURES */
-.features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 25px;
-}
-
-.card {
-  background: #111827;
-  padding: 25px;
-  border-radius: 12px;
-  border: 1px solid #1f2937;
-}
-
-.card h4 {
-  color: #60a5fa;
-  margin-bottom: 10px;
-}
-
-/* USE CASES */
-.usecases {
-  text-align: center;
-}
-
-.usecases li {
-  list-style: none;
-  margin: 10px 0;
-  color: #9ca3af;
-}
-
-/* DOWNLOAD BOX */
-.download {
-  text-align: center;
-  background: #111827;
-  padding: 50px 20px;
-  border-radius: 12px;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px;
-  border-top: 1px solid #1f2937;
-  color: #6b7280;
-}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>QRocket 🚀</h1>
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#download">Download</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <h3>QRocket 🚀</h3>
+  <div>
+    <span class="toggle" onclick="toggleMode()">🌙</span>
+  </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
+<section class="hero fade-in">
   <h2>Scan. Generate. Done.</h2>
   <p>Fast QR & barcode scanner with offline support</p>
 
-  <a class="btn"
-     href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk"
-     target="_blank"
-     rel="noopener">
-     Download APK
-  </a>
+  <div class="install-card">
+    <img src="https://m.media-amazon.com/images/I/41y7-AYyjxL.png">
+    <div class="install-info">
+      <h4>QRocket</h4>
+      <small>Fast QR Scanner</small>
+    </div>
+    <a class="install-btn" href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk">Install</a>
+  </div>
 
-  <p style="margin-top:15px; color:#9ca3af; font-size:0.9em;">
-    ⬇️ Downloads: <span id="downloads">Loading...</span>
-  </p>
+  <p style="margin-top:10px">⬇️ <span id="downloads">Loading...</span> downloads</p>
 </section>
 
-<!-- FEATURES -->
-<section id="features">
+<section class="fade-in">
   <h3>Features</h3>
-
   <div class="features">
-    <div class="card"><h4>⚡ Fast Scan</h4><p>Instant QR detection</p></div>
-    <div class="card"><h4>📱 Generator</h4><p>Create QR codes easily</p></div>
-    <div class="card"><h4>🕘 History</h4><p>Saved scans</p></div>
-    <div class="card"><h4>📡 Offline</h4><p>No internet required</p></div>
+    <div class="card">⚡ Fast Scan</div>
+    <div class="card">📱 Generator</div>
+    <div class="card">🕘 History</div>
+    <div class="card">📡 Offline</div>
   </div>
 </section>
 
-<!-- USE CASES -->
-<section class="usecases">
-  <h3>What You Can Do</h3>
-  <ul>
-    <li>🌐 Open websites instantly</li>
-    <li>📶 Share WiFi easily</li>
-    <li>👤 Share contacts</li>
-    <li>📦 Scan products</li>
-  </ul>
-</section>
-
-<!-- DOWNLOAD -->
-<section id="download">
-  <div class="download">
-    <h3>Download QRocket</h3>
-
-    <a class="btn"
-       href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk"
-       target="_blank">
-       Get APK
-    </a>
-
-    <p style="margin-top:15px;">
-      ⚠️ Enable “Install unknown apps” on Android
-    </p>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h3>Contact</h3>
-  <p style="text-align:center;">📧 thepalky@proton.me</p>
-</section>
-
-<footer>
-  © 2026 QRocket ❤️ Built by The Palky
-</footer>
+<footer>© 2026 QRocket</footer>
 
 <script>
-/* GitHub download counter */
+// download counter
 fetch("https://api.github.com/repos/itsmethepalky/QRocket/releases")
-  .then(r => r.json())
-  .then(data => {
-    let total = 0;
+.then(r=>r.json())
+.then(d=>{
+ let t=0;d.forEach(r=>r.assets.forEach(a=>t+=a.download_count));
+ document.getElementById("downloads").innerText=t;
+});
 
-    data.forEach(rel => {
-      rel.assets.forEach(asset => {
-        total += asset.download_count;
-      });
-    });
+// dark/light toggle
+function toggleMode(){
+ document.body.classList.toggle("light");
+}
 
-    document.getElementById("downloads").innerText = total;
-  })
-  .catch(() => {
-    document.getElementById("downloads").innerText = "N/A";
-  });
+// PWA install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  console.log('PWA ready');
+});
+
 </script>
 
 </body>
