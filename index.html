@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QRocket - Fast QR Scanner & Generator</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QRocket – Fast QR Scanner & Generator</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
 
 <style>
-:root {
+:root{
   --primary:#3b82f6;
   --bg:#0b1220;
   --card:#111827;
   --text:#e5e7eb;
   --muted:#9ca3af;
 }
-
-body.light {
-  --bg:#f9fafb;
-  --card:#ffffff;
-  --text:#111827;
-  --muted:#6b7280;
+body.light{
+  --bg:#f9fafb;--card:#ffffff;--text:#111827;--muted:#6b7280;
 }
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:var(--bg);color:var(--text);transition:.3s}
+body{background:var(--bg);color:var(--text);transition:.3s;line-height:1.6}
 
 header{
   position:sticky;top:0;z-index:1000;
   display:flex;justify-content:space-between;align-items:center;
-  padding:15px 20px;
-  border-bottom:1px solid #1f2937;
+  padding:15px 20px;border-bottom:1px solid #1f2937;
   backdrop-filter:blur(10px);
 }
 
-.hero{text-align:center;padding:70px 15px;background:radial-gradient(circle at top,#1d4ed8,#0b1220)}
-.hero h2{font-size:2rem}
+nav a{margin-left:15px;color:var(--text);text-decoration:none;font-size:0.9rem}
+
+.hero{text-align:center;padding:90px 20px;background:radial-gradient(circle at top,#1d4ed8,#0b1220)}
+.hero h1{font-size:2.5rem}
 .hero p{color:var(--muted);margin-top:10px}
 
-.btn{display:inline-block;margin-top:20px;padding:12px 24px;border-radius:30px;background:var(--primary);color:#fff;text-decoration:none;font-weight:600;transition:.3s}
-.btn:hover{transform:scale(1.05)}
+.badges{margin-top:20px;display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+.badges img{height:50px;cursor:pointer}
 
-section{padding:60px 15px;max-width:1100px;margin:auto}
+.rating{margin-top:10px;color:#fbbf24;font-weight:600}
 
-/* INSTALL CARD */
 .install-card{
   display:flex;gap:15px;align-items:center;
   background:var(--card);
   padding:15px;border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  margin-top:20px;
+  margin-top:25px;
+  max-width:400px;margin-left:auto;margin-right:auto;
 }
 .install-card img{width:60px;border-radius:12px}
-.install-info{flex:1}
-.install-info h4{margin-bottom:5px}
 .install-btn{padding:8px 15px;border-radius:20px;background:var(--primary);color:#fff;text-decoration:none}
 
+section{padding:70px 20px;max-width:1100px;margin:auto}
+
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:var(--card);padding:20px;border-radius:12px;transition:.3s}
+.card{background:var(--card);padding:25px;border-radius:12px;transition:.3s}
 .card:hover{transform:translateY(-6px)}
 
-footer{text-align:center;padding:20px;color:var(--muted)}
+.screenshots{display:flex;gap:15px;overflow-x:auto}
+.screenshots img{height:400px;border-radius:12px}
 
-.toggle{
-  cursor:pointer;
-  background:var(--card);
-  padding:6px 10px;
-  border-radius:20px;
-}
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.testimonial{background:var(--card);padding:20px;border-radius:12px}
 
-/* animations */
-.fade-in{opacity:0;transform:translateY(20px);animation:fade 1s forwards}
+.cta{text-align:center;background:var(--card);padding:40px;border-radius:12px}
+
+footer{text-align:center;padding:25px;color:var(--muted)}
+
+.toggle{cursor:pointer;padding:6px 10px;background:var(--card);border-radius:20px}
+
+.fade{opacity:0;transform:translateY(20px);animation:fade 1s forwards}
 @keyframes fade{to{opacity:1;transform:none}}
 
+@media(max-width:600px){
+.hero h1{font-size:1.8rem}
+}
 </style>
 </head>
 
@@ -81,60 +81,80 @@ footer{text-align:center;padding:20px;color:var(--muted)}
 <header>
   <h3>QRocket 🚀</h3>
   <div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#screens">Screens</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
     <span class="toggle" onclick="toggleMode()">🌙</span>
   </div>
 </header>
 
-<section class="hero fade-in">
-  <h2>Scan. Generate. Done.</h2>
-  <p>Fast QR & barcode scanner with offline support</p>
+<section class="hero fade">
+  <h1>Scan. Generate. Done.</h1>
+  <p>Lightning-fast QR & barcode scanner with offline support</p>
+
+  <div class="rating">★★★★★ 4.8 • 10K+ users</div>
+
+  <div class="badges">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg">
+    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg">
+  </div>
 
   <div class="install-card">
     <img src="https://m.media-amazon.com/images/I/41y7-AYyjxL.png">
-    <div class="install-info">
-      <h4>QRocket</h4>
+    <div>
+      <strong>QRocket</strong><br>
       <small>Fast QR Scanner</small>
     </div>
     <a class="install-btn" href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk">Install</a>
   </div>
-
-  <p style="margin-top:10px">⬇️ <span id="downloads">Loading...</span> downloads</p>
 </section>
 
-<section class="fade-in">
-  <h3>Features</h3>
+<section id="features" class="fade">
+  <h2>Features</h2>
   <div class="features">
-    <div class="card">⚡ Fast Scan</div>
-    <div class="card">📱 Generator</div>
-    <div class="card">🕘 History</div>
-    <div class="card">📡 Offline</div>
+    <div class="card">⚡ Instant scanning</div>
+    <div class="card">📱 QR generator</div>
+    <div class="card">🕘 Scan history</div>
+    <div class="card">📡 Works offline</div>
   </div>
 </section>
 
-<footer>© 2026 QRocket</footer>
+<section id="screens" class="fade">
+  <h2>Screenshots</h2>
+  <div class="screenshots">
+    <img src="https://via.placeholder.com/250x500">
+    <img src="https://via.placeholder.com/250x500">
+    <img src="https://via.placeholder.com/250x500">
+  </div>
+</section>
+
+<section id="reviews" class="fade">
+  <h2>What users say</h2>
+  <div class="testimonials">
+    <div class="testimonial">"Super fast and clean UI!"</div>
+    <div class="testimonial">"Works offline perfectly."</div>
+    <div class="testimonial">"Best QR app I've used."</div>
+  </div>
+</section>
+
+<section class="cta fade">
+  <h2>Download QRocket now</h2>
+  <p>Fast. Simple. Offline.</p>
+  <a class="install-btn" href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk">Get APK</a>
+</section>
+
+<footer>
+© 2026 QRocket • Built by The Palky
+</footer>
 
 <script>
-// download counter
-fetch("https://api.github.com/repos/itsmethepalky/QRocket/releases")
-.then(r=>r.json())
-.then(d=>{
- let t=0;d.forEach(r=>r.assets.forEach(a=>t+=a.download_count));
- document.getElementById("downloads").innerText=t;
-});
+function toggleMode(){document.body.classList.toggle('light')}
 
-// dark/light toggle
-function toggleMode(){
- document.body.classList.toggle("light");
+if('serviceWorker' in navigator){
+ navigator.serviceWorker.register('sw.js');
 }
-
-// PWA install prompt
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  console.log('PWA ready');
-});
-
 </script>
 
 </body>
