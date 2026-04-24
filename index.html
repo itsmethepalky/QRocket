@@ -8,6 +8,10 @@
   <link rel="icon" type="image/png" href="https://m.media-amazon.com/images/I/41y7-AYyjxL.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
 
@@ -27,6 +31,7 @@
       justify-content:space-between;
       align-items:center;
       border-bottom:1px solid #1f2937;
+      z-index:100;
     }
 
     header h1 { font-size:1.4em; color:#60a5fa; }
@@ -58,6 +63,7 @@
       text-decoration:none;
       font-weight:600;
       transition:0.3s;
+      cursor:pointer;
     }
 
     .btn:hover { background:#2563eb; transform:translateY(-2px); }
@@ -119,6 +125,12 @@
       color:#6b7280;
       border-top:1px solid #1f2937;
     }
+
+    .stats {
+      margin-top:10px;
+      color:#9ca3af;
+      font-size:0.9em;
+    }
   </style>
 </head>
 
@@ -134,20 +146,22 @@
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <h2>Scan. Generate. Done.</h2>
   <p>Lightning-fast QR & barcode scanner with offline support.</p>
 
-  <a href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk"
-     class="btn"
-     download="QRocket.apk"
-     onclick="this.innerText='Downloading...'">
-    Download APK
+  <a id="downloadBtn"
+     href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk"
+     class="btn">
+     Download APK
   </a>
 
+  <p class="stats">⬇️ Downloads: <span id="downloads">Loading...</span></p>
   <p style="margin-top:10px;font-size:0.9em;">78.5MB • Android 7.0+</p>
 </section>
 
+<!-- FEATURES -->
 <section id="features">
   <h3>Features</h3>
   <div class="features">
@@ -158,6 +172,7 @@
   </div>
 </section>
 
+<!-- USE CASES -->
 <section class="usecases">
   <h3>What You Can Do</h3>
   <ul>
@@ -168,21 +183,22 @@
   </ul>
 </section>
 
+<!-- DOWNLOAD -->
 <section id="download">
   <div class="download">
     <h3>Download QRocket</h3>
 
-    <a href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk"
-       class="btn"
-       download="QRocket.apk"
-       onclick="this.innerText='Downloading...'">
-      Get APK
+    <a id="downloadBtn2"
+       href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk"
+       class="btn">
+       Get APK
     </a>
 
-    <p>⚠️ Enable "Install unknown apps" in Android settings</p>
+    <p style="margin-top:15px;">⚠️ Enable "Install unknown apps" in Android settings</p>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <h3>Contact</h3>
   <p style="text-align:center;">📧 thepalky@proton.me</p>
@@ -191,6 +207,67 @@
 <footer>
   <p>© 2026 QRocket ❤️ Developed by The Palky</p>
 </footer>
+
+<!-- SCRIPTS -->
+<script>
+/* ---------------- GSAP ANIMATIONS ---------------- */
+gsap.from(".hero h2", { opacity:0, y:40, duration:1 });
+gsap.from(".hero p", { opacity:0, y:20, delay:0.3, duration:1 });
+gsap.from(".btn", { scale:0.8, opacity:0, delay:0.6, duration:0.8, ease:"back.out(1.7)" });
+
+gsap.utils.toArray(".card").forEach((card, i) => {
+  gsap.from(card, {
+    scrollTrigger: card,
+    opacity:0,
+    y:40,
+    duration:0.6,
+    delay:i * 0.1
+  });
+});
+
+/* ---------------- FORCE DOWNLOAD FIX ---------------- */
+async function forceDownload(url, filename, btn) {
+  btn.innerText = "Preparing Download...";
+
+  const res = await fetch(url);
+  const blob = await res.blob();
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  btn.innerText = "Download Started 🚀";
+}
+
+/* attach both buttons */
+document.querySelectorAll("#downloadBtn, #downloadBtn2").forEach(btn => {
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    forceDownload(this.href, "QRocket.apk", this);
+  });
+});
+
+/* ---------------- GITHUB DOWNLOAD COUNT ---------------- */
+fetch("https://api.github.com/repos/itsmethepalky/QRocket/releases")
+  .then(res => res.json())
+  .then(data => {
+    let total = 0;
+
+    data.forEach(rel => {
+      rel.assets.forEach(asset => {
+        total += asset.download_count;
+      });
+    });
+
+    document.getElementById("downloads").innerText = total;
+  })
+  .catch(() => {
+    document.getElementById("downloads").innerText = "N/A";
+  });
+</script>
 
 </body>
 </html>
