@@ -64,6 +64,10 @@
       font-weight:600;
       transition:0.3s;
       cursor:pointer;
+      position:relative;
+      z-index:10;
+      opacity:1;
+      visibility:visible;
     }
 
     .btn:hover { background:#2563eb; transform:translateY(-2px); }
@@ -210,7 +214,7 @@
 
 <!-- SCRIPTS -->
 <script>
-/* ---------------- GSAP ANIMATIONS ---------------- */
+/* GSAP animations */
 gsap.from(".hero h2", { opacity:0, y:40, duration:1 });
 gsap.from(".hero p", { opacity:0, y:20, delay:0.3, duration:1 });
 gsap.from(".btn", { scale:0.8, opacity:0, delay:0.6, duration:0.8, ease:"back.out(1.7)" });
@@ -225,32 +229,17 @@ gsap.utils.toArray(".card").forEach((card, i) => {
   });
 });
 
-/* ---------------- FORCE DOWNLOAD FIX ---------------- */
-async function forceDownload(url, filename, btn) {
-  btn.innerText = "Preparing Download...";
-
-  const res = await fetch(url);
-  const blob = await res.blob();
-
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  btn.innerText = "Download Started 🚀";
-}
-
-/* attach both buttons */
+/* simple safe download UX */
 document.querySelectorAll("#downloadBtn, #downloadBtn2").forEach(btn => {
-  btn.addEventListener("click", function(e) {
-    e.preventDefault();
-    forceDownload(this.href, "QRocket.apk", this);
+  btn.addEventListener("click", function () {
+    this.innerText = "Downloading...";
+    setTimeout(() => {
+      this.innerText = "Download APK";
+    }, 3000);
   });
 });
 
-/* ---------------- GITHUB DOWNLOAD COUNT ---------------- */
+/* GitHub download count */
 fetch("https://api.github.com/repos/itsmethepalky/QRocket/releases")
   .then(res => res.json())
   .then(data => {
