@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QRocket - Fast QR Scanner & Generator</title>
 
-<link rel="icon" type="image/png" href="https://m.media-amazon.com/images/I/41y7-AYyjxL.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -25,7 +24,7 @@ body {
 header {
   position: sticky;
   top: 0;
-  z-index: 9999;
+  z-index: 10000;
   background: rgba(11,18,32,0.95);
   backdrop-filter: blur(10px);
   padding: 15px 30px;
@@ -41,7 +40,7 @@ header h1 {
 }
 
 header a {
-  color: white;
+  color: #fff;
   margin-left: 20px;
   text-decoration: none;
   font-size: 0.9em;
@@ -50,10 +49,8 @@ header a {
 /* HERO */
 .hero {
   text-align: center;
-  padding: 100px 20px;
+  padding: 110px 20px;
   background: radial-gradient(circle at top, #1d4ed8, #0b1220);
-  position: relative;
-  z-index: 1;
 }
 
 .hero h2 {
@@ -62,11 +59,11 @@ header a {
 
 .hero p {
   margin-top: 15px;
-  color: #9ca3af;
   font-size: 1.2em;
+  color: #9ca3af;
 }
 
-/* BUTTON FIX (IMPORTANT) */
+/* BUTTON (FIXED + STABLE) */
 .btn {
   display: inline-block;
   margin-top: 30px;
@@ -82,11 +79,10 @@ header a {
   position: relative;
   z-index: 99999;
 
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
+  opacity: 1;
+  visibility: visible;
 
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 .btn:hover {
@@ -151,13 +147,6 @@ footer {
   padding: 30px;
   border-top: 1px solid #1f2937;
   color: #6b7280;
-  font-size: 0.9em;
-}
-
-/* DOWNLOAD COUNTER */
-.stats {
-  margin-top: 10px;
-  color: #9ca3af;
 }
 </style>
 </head>
@@ -178,7 +167,6 @@ footer {
   <h2>Scan. Generate. Done.</h2>
   <p>Fast QR & barcode scanner with offline support</p>
 
-  <!-- FIXED BUTTON -->
   <a class="btn"
      href="https://github.com/itsmethepalky/QRocket/releases/download/v1.1.1/Qrocket.apk"
      target="_blank"
@@ -186,30 +174,32 @@ footer {
      Download APK
   </a>
 
-  <p class="stats">⬇️ Downloads: <span id="downloads">Loading...</span></p>
+  <p style="margin-top:15px; color:#9ca3af; font-size:0.9em;">
+    ⬇️ Downloads: <span id="downloads">Loading...</span>
+  </p>
 </section>
 
 <!-- FEATURES -->
 <section id="features">
   <h3>Features</h3>
+
   <div class="features">
-    <div class="card">
-      <h4>⚡ Fast Scan</h4>
-      <p>Instant QR detection</p>
-    </div>
-    <div class="card">
-      <h4>📱 Generator</h4>
-      <p>Create QR codes easily</p>
-    </div>
-    <div class="card">
-      <h4>🕘 History</h4>
-      <p>Saved scans</p>
-    </div>
-    <div class="card">
-      <h4>📡 Offline</h4>
-      <p>No internet needed</p>
-    </div>
+    <div class="card"><h4>⚡ Fast Scan</h4><p>Instant QR detection</p></div>
+    <div class="card"><h4>📱 Generator</h4><p>Create QR codes easily</p></div>
+    <div class="card"><h4>🕘 History</h4><p>Saved scans</p></div>
+    <div class="card"><h4>📡 Offline</h4><p>No internet required</p></div>
   </div>
+</section>
+
+<!-- USE CASES -->
+<section class="usecases">
+  <h3>What You Can Do</h3>
+  <ul>
+    <li>🌐 Open websites instantly</li>
+    <li>📶 Share WiFi easily</li>
+    <li>👤 Share contacts</li>
+    <li>📦 Scan products</li>
+  </ul>
 </section>
 
 <!-- DOWNLOAD -->
@@ -223,7 +213,9 @@ footer {
        Get APK
     </a>
 
-    <p style="margin-top:15px;">Enable “Install unknown apps” on Android</p>
+    <p style="margin-top:15px;">
+      ⚠️ Enable “Install unknown apps” on Android
+    </p>
   </div>
 </section>
 
@@ -238,14 +230,18 @@ footer {
 </footer>
 
 <script>
-/* SAFE DOWNLOAD COUNTER */
+/* GitHub download counter */
 fetch("https://api.github.com/repos/itsmethepalky/QRocket/releases")
   .then(r => r.json())
   .then(data => {
     let total = 0;
+
     data.forEach(rel => {
-      rel.assets.forEach(asset => total += asset.download_count);
+      rel.assets.forEach(asset => {
+        total += asset.download_count;
+      });
     });
+
     document.getElementById("downloads").innerText = total;
   })
   .catch(() => {
